@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TobaccoRadar</string>
+    <string name="open">Nyitva</string>
+    <string name="closed">Zárva</string>
+    <string name="welcome">Üdvözöljük</string>
+    <string name="search">Keresés</string>
+</resources>
