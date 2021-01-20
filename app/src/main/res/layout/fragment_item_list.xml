@@ -35,7 +35,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchText"
-        tools:context=".fragments.TobaccoShopFragment"
+        tools:context=".ui.fragments.TobaccoShopFragment"
         tools:layout_editor_absoluteX="2dp"
         tools:listitem="@layout/row_item" />
 

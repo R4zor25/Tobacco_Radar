@@ -1,9 +1,11 @@
-package hu.bme.aut.android.tobaccoradar
+package hu.bme.aut.android.tobaccoradar.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import hu.bme.aut.android.tobaccoradar.R
+import hu.bme.aut.android.tobaccoradar.network.APIConnection
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,10 +14,13 @@ class SplashActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        APIConnection.initConnection()
+        APIConnection.getAllTobaccoShop()
+
         Handler().postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-        }, 2000)
+        }, 3000)
 
 
     }

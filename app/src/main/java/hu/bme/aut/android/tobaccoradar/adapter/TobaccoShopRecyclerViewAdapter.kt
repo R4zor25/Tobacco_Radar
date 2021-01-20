@@ -1,26 +1,25 @@
 package hu.bme.aut.android.tobaccoradar.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.tobaccoradar.R
-import hu.bme.aut.android.tobaccoradar.model.TobaccoShop
+import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopListModel
+import hu.bme.aut.android.tobaccoradar.ui.fragments.TobaccoShopFragment
 import kotlinx.android.synthetic.main.row_item.view.*
 
-class TobaccoShopRecyclerViewAdapter : RecyclerView.Adapter<TobaccoShopRecyclerViewAdapter.ViewHolder>() {
+class TobaccoShopRecyclerViewAdapter :
+    RecyclerView.Adapter<TobaccoShopRecyclerViewAdapter.ViewHolder>() {
 
-    private var shopList : MutableList<TobaccoShop> = mutableListOf<TobaccoShop>(
-        TobaccoShop("Név1", "Cím1", false, "", ""),
-        TobaccoShop("Név2", "Cím2", true, "", ""),
-        TobaccoShop("Név3", "Cím3", false, "", "")
-    )
+    private var shopListModelList: MutableList<TobaccoShopListModel> = mutableListOf() //TODO MODIFY
 
-     private var searchedShopList : MutableList<TobaccoShop> = mutableListOf()
+    private var searchedShopListModelList: MutableList<TobaccoShopListModel> = mutableListOf()
 
-    var itemClickListener : TobaccoShopClickListener? = null
+    var itemClickListener: TobaccoShopClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -28,57 +27,68 @@ class TobaccoShopRecyclerViewAdapter : RecyclerView.Adapter<TobaccoShopRecyclerV
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TobaccoShopRecyclerViewAdapter.ViewHolder, position: Int) {
-        val tobaccoShop = shopList[position]
+    override fun onBindViewHolder(
+        holder: TobaccoShopRecyclerViewAdapter.ViewHolder,
+        position: Int
+    ) {
+        val tobaccoShop = shopListModelList[position]
 
-        holder.tobaccoShop = tobaccoShop
+        holder.tobaccoShopListModel = tobaccoShop
         holder.tvName.text = tobaccoShop.name
         holder.tvAddress.text = tobaccoShop.address
 
-        if(tobaccoShop.isOpen) {
+        if (tobaccoShop.isOpen) {
             holder.tvIsOpen.text = "Nyitva"
             holder.tvIsOpen.setTextColor(Color.GREEN)
-        }
-        else {
+        } else {
             holder.tvIsOpen.text = "Zárva"
             holder.tvIsOpen.setTextColor(Color.RED)
         }
 
     }
 
-    fun search(text : String){
-        if(searchedShopList.size != 0){
-            shopList = searchedShopList
-            searchedShopList = mutableListOf()
+    fun search(text: String) {
+        if (searchedShopListModelList.size != 0) {
+            shopListModelList = searchedShopListModelList
+            searchedShopListModelList = mutableListOf()
         }
-        for (s in shopList){
-            if(s.name.contains(text))
-                searchedShopList.add(s)
+        for (s in shopListModelList) {
+            if (s.name.contains(text))
+                searchedShopListModelList.add(s)
         }
-        val backUp = shopList
-        shopList = searchedShopList
-        searchedShopList = backUp
+        val backUp = shopListModelList
+        shopListModelList = searchedShopListModelList
+        searchedShopListModelList = backUp
         notifyDataSetChanged()
         //TODO ALL LOWER CASE
     }
 
-    override fun getItemCount() = shopList.size
+    fun loadList() {
+        shopListModelList = TobaccoShopFragment.tList
+    }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val tvName : TextView = itemView.tvName
-        val tvAddress : TextView = itemView.tvAddress
-        val tvIsOpen : TextView = itemView.tvIsOpen
-        var tobaccoShop: TobaccoShop? = null
+    override fun getItemCount() = shopListModelList.size
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvName: TextView = itemView.tvName
+        val tvAddress: TextView = itemView.tvAddress
+        val tvIsOpen: TextView = itemView.tvIsOpen
+        var tobaccoShopListModel: TobaccoShopListModel? = null
 
         init {
             itemView.setOnClickListener {
-                tobaccoShop?.let { tobaccoShop -> itemClickListener?.onItemClick(tobaccoShop) }
+                tobaccoShopListModel?.let { tobaccoShop ->
+                    itemClickListener?.onItemClick(
+                        tobaccoShop
+                    )
+                }
             }
         }
 
     }
 
-    interface TobaccoShopClickListener{
-        fun onItemClick(tobaccoShop: TobaccoShop)
+    interface TobaccoShopClickListener {
+        fun onItemClick(tobaccoShopListModel: TobaccoShopListModel)
     }
 }
+
