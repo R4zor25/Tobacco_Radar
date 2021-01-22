@@ -2,10 +2,7 @@ package hu.bme.aut.android.tobaccoradar.network
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.media.Image
 import android.util.Log
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopListModel
 import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopModel
@@ -15,7 +12,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.InputStream
 
 object APIConnection {
 
@@ -31,9 +27,9 @@ object APIConnection {
         MutableLiveData<Bitmap>()
     }
 
-    lateinit var tobaccoShopAPI: TobaccoShopAPI
+    private lateinit var tobaccoShopAPI: TobaccoShopAPI
 
-    lateinit var retrofit: Retrofit
+    private lateinit var retrofit: Retrofit
 
     private fun getAllTobaccoShop() {
         val tobaccoShopList = tobaccoShopAPI.getAllTobaccoShop()
@@ -90,8 +86,8 @@ object APIConnection {
                 response: Response<ResponseBody>
             ) {
                 if (response.isSuccessful) {
-                    selectedTobaccoShopImageAPI.value = BitmapFactory.decodeStream(response.body()?.byteStream())
-                    Log.d("API_ERROR", "Siker")
+                    selectedTobaccoShopImageAPI.value =
+                        BitmapFactory.decodeStream(response.body()?.byteStream())
                 }
             }
         })

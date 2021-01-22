@@ -1,6 +1,5 @@
 package hu.bme.aut.android.tobaccoradar.network
 
-import android.media.Image
 import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopListModel
 import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopModel
 import okhttp3.ResponseBody
@@ -14,7 +13,7 @@ interface TobaccoShopAPI {
     fun getAllTobaccoShop(): Call<MutableList<TobaccoShopListModel>>
 
     @GET("/tobbacoshop/{id}")
-    fun getSelectedTobaccoShop(@Path ("id") id: Int): Call<TobaccoShopModel>
+    fun getSelectedTobaccoShop(@Path("id") id: Int): Call<TobaccoShopModel>
 
     @GET("/tobbacoshop/{id}/image")
     @Streaming

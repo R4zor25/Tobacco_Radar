@@ -1,6 +1,5 @@
 package hu.bme.aut.android.tobaccoradar.network.model
 
-import android.media.Image
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)

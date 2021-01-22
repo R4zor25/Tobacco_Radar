@@ -9,6 +9,7 @@ import hu.bme.aut.android.tobaccoradar.R
 import hu.bme.aut.android.tobaccoradar.network.APIConnection
 import hu.bme.aut.android.tobaccoradar.ui.fragments.MapsFragment
 import hu.bme.aut.android.tobaccoradar.ui.fragments.TobaccoShopFragment
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        System.exit(0)
+        exitProcess(0)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

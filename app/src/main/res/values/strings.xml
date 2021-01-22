@@ -6,4 +6,8 @@
     <string name="search">Keresés</string>
     <string name="map_view">Térkép nézet</string>
     <string name="list_view">Lista nézet</string>
+    <string name="image_of_the_tobacco_shop">Kép a dohányboltról</string>
+    <string name="next_open_time">Következő nyitás</string>
+    <string name="today">Ma</string>
+    <string name="tomorrow">Holnap</string>
 </resources>

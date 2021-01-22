@@ -2,7 +2,6 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginEnd="3dp"
@@ -16,15 +15,16 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/image_of_the_tobacco_shop" />
 
     <TextView
         android:id="@+id/tsName"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:gravity="center|start"
+        android:textSize="22sp"
+        android:gravity="start"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,50 +37,51 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:gravity="center|start"
+        android:textSize="20sp"
+        android:gravity="start"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintHeight_percent="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tsName"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.5" />
 
     <TextView
-        android:id="@+id/Schedule"
+        android:id="@+id/tsOpenSchedule"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="open"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHeight_percent="0.18"
         app:layout_constraintTop_toBottomOf="@+id/shop_image"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.5" />
 
     <TextView
-        android:id="@+id/isOpen"
+        android:id="@+id/tsIsOpen"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="open"
-        android:textColor="@color/black"
         android:gravity="center|start"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tsDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Schedule" />
+        app:layout_constraintTop_toBottomOf="@+id/tsOpenSchedule" />
 
     <TextView
         android:id="@+id/tsDesc"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.33"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHeight_percent="0.30"
+        app:layout_constraintStart_toStartOf="parent"
+        android:scrollbars="vertical"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

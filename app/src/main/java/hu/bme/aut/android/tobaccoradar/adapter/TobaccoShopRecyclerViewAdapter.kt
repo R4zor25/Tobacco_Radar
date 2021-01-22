@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.tobaccoradar.R
 import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopListModel
 import kotlinx.android.synthetic.main.row_item.view.*
+import java.util.*
 
 class TobaccoShopRecyclerViewAdapter :
     RecyclerView.Adapter<TobaccoShopRecyclerViewAdapter.ViewHolder>() {
 
     private var tobaccoShopModelList: MutableList<TobaccoShopListModel> =
-        mutableListOf() //TODO MODIFY
+        mutableListOf()
 
     private var searchedTobaccoShopModelList: MutableList<TobaccoShopListModel> = mutableListOf()
 
@@ -37,10 +38,10 @@ class TobaccoShopRecyclerViewAdapter :
         holder.tvAddress.text = tobaccoShop.address
 
         if (tobaccoShop.isOpen) {
-            holder.tvIsOpen.text = "Nyitva"
+            holder.tvIsOpen.text = holder.itemView.context.getString(R.string.open)
             holder.tvIsOpen.setTextColor(Color.GREEN)
         } else {
-            holder.tvIsOpen.text = "Zárva"
+            holder.tvIsOpen.text = holder.itemView.context.getString(R.string.closed)
             holder.tvIsOpen.setTextColor(Color.RED)
         }
 
@@ -52,7 +53,7 @@ class TobaccoShopRecyclerViewAdapter :
             searchedTobaccoShopModelList = mutableListOf()
         }
         for (s in tobaccoShopModelList) {
-            if (s.name.contains(text))
+            if (s.name.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)))
                 searchedTobaccoShopModelList.add(s)
         }
         val backUp = tobaccoShopModelList

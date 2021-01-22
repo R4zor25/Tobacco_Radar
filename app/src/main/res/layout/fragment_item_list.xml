@@ -14,7 +14,9 @@
         android:hint="@string/search"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="text"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/searchButton"

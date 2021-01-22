@@ -68,8 +68,6 @@ class TobaccoShopFragment : Fragment(), TobaccoShopRecyclerViewAdapter.TobaccoSh
 
         const val GET_SELECTED_SHOP_ID = "GET_SELECTED_SHOP_ID"
 
-        const val GET_SELECTED_SHOP_BUNDLE = "GET_SELECTED_SHOP_BUNDLE"
-
         @JvmStatic
         fun newInstance(columnCount: Int) =
             TobaccoShopFragment().apply {
