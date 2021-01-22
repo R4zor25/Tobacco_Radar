@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:text="@string/welcome"
+        android:textColor="#2175FF"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

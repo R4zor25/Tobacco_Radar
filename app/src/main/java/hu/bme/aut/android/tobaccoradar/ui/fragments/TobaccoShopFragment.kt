@@ -2,7 +2,6 @@ package hu.bme.aut.android.tobaccoradar.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import hu.bme.aut.android.tobaccoradar.R
 import hu.bme.aut.android.tobaccoradar.adapter.TobaccoShopRecyclerViewAdapter
-import hu.bme.aut.android.tobaccoradar.network.APIConnection
 import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopListModel
 import hu.bme.aut.android.tobaccoradar.ui.activities.DetailsActivity
 import kotlinx.android.synthetic.main.fragment_item_list.*
@@ -39,7 +37,6 @@ class TobaccoShopFragment : Fragment(), TobaccoShopRecyclerViewAdapter.TobaccoSh
 
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-        // Set the adapter
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = when {
@@ -58,7 +55,6 @@ class TobaccoShopFragment : Fragment(), TobaccoShopRecyclerViewAdapter.TobaccoSh
             recyclerViewAdapter.search(searchText.text.toString())
         }
         list.adapter = recyclerViewAdapter
-        recyclerViewAdapter.loadList()
     }
 
     fun setupRecyclerView() {
@@ -70,11 +66,9 @@ class TobaccoShopFragment : Fragment(), TobaccoShopRecyclerViewAdapter.TobaccoSh
 
         const val ARG_COLUMN_COUNT = "1"
 
-        const val GET_SELECTED_SHOP = "GET_SELECTED_SHOP"
+        const val GET_SELECTED_SHOP_ID = "GET_SELECTED_SHOP_ID"
 
         const val GET_SELECTED_SHOP_BUNDLE = "GET_SELECTED_SHOP_BUNDLE"
-
-        var tList: MutableList<TobaccoShopListModel> = mutableListOf()
 
         @JvmStatic
         fun newInstance(columnCount: Int) =
@@ -87,9 +81,7 @@ class TobaccoShopFragment : Fragment(), TobaccoShopRecyclerViewAdapter.TobaccoSh
 
     override fun onItemClick(tobaccoShopListModel: TobaccoShopListModel) {
         val intent = Intent(this.context, DetailsActivity::class.java)
-        val shop = Bundle()
-        shop.putParcelable(GET_SELECTED_SHOP, tobaccoShopListModel)
-        intent.putExtra(GET_SELECTED_SHOP_BUNDLE, shop)
+        intent.putExtra(GET_SELECTED_SHOP_ID, tobaccoShopListModel.id)
         startActivity(intent)
 
     }

@@ -1,7 +1,6 @@
 package hu.bme.aut.android.tobaccoradar.adapter
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +8,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.tobaccoradar.R
 import hu.bme.aut.android.tobaccoradar.network.model.TobaccoShopListModel
-import hu.bme.aut.android.tobaccoradar.ui.fragments.TobaccoShopFragment
 import kotlinx.android.synthetic.main.row_item.view.*
 
 class TobaccoShopRecyclerViewAdapter :
     RecyclerView.Adapter<TobaccoShopRecyclerViewAdapter.ViewHolder>() {
 
-    private var shopListModelList: MutableList<TobaccoShopListModel> = mutableListOf() //TODO MODIFY
+    private var tobaccoShopModelList: MutableList<TobaccoShopListModel> =
+        mutableListOf() //TODO MODIFY
 
-    private var searchedShopListModelList: MutableList<TobaccoShopListModel> = mutableListOf()
+    private var searchedTobaccoShopModelList: MutableList<TobaccoShopListModel> = mutableListOf()
 
     var itemClickListener: TobaccoShopClickListener? = null
 
@@ -31,7 +30,7 @@ class TobaccoShopRecyclerViewAdapter :
         holder: TobaccoShopRecyclerViewAdapter.ViewHolder,
         position: Int
     ) {
-        val tobaccoShop = shopListModelList[position]
+        val tobaccoShop = tobaccoShopModelList[position]
 
         holder.tobaccoShopListModel = tobaccoShop
         holder.tvName.text = tobaccoShop.name
@@ -48,26 +47,26 @@ class TobaccoShopRecyclerViewAdapter :
     }
 
     fun search(text: String) {
-        if (searchedShopListModelList.size != 0) {
-            shopListModelList = searchedShopListModelList
-            searchedShopListModelList = mutableListOf()
+        if (searchedTobaccoShopModelList.isNotEmpty()) {
+            tobaccoShopModelList = searchedTobaccoShopModelList
+            searchedTobaccoShopModelList = mutableListOf()
         }
-        for (s in shopListModelList) {
+        for (s in tobaccoShopModelList) {
             if (s.name.contains(text))
-                searchedShopListModelList.add(s)
+                searchedTobaccoShopModelList.add(s)
         }
-        val backUp = shopListModelList
-        shopListModelList = searchedShopListModelList
-        searchedShopListModelList = backUp
+        val backUp = tobaccoShopModelList
+        tobaccoShopModelList = searchedTobaccoShopModelList
+        searchedTobaccoShopModelList = backUp
         notifyDataSetChanged()
-        //TODO ALL LOWER CASE
     }
 
-    fun loadList() {
-        shopListModelList = TobaccoShopFragment.tList
+    fun addAll(shops: MutableList<TobaccoShopListModel>) {
+        tobaccoShopModelList.clear()
+        tobaccoShopModelList.addAll(shops)
     }
 
-    override fun getItemCount() = shopListModelList.size
+    override fun getItemCount() = tobaccoShopModelList.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.tvName

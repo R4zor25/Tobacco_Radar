@@ -1,13 +1,15 @@
 package hu.bme.aut.android.tobaccoradar.network.model
 
+import android.media.Image
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class TobaccoShopListModel(
+data class TobaccoShopModel(
     val id: Int,
     val name: String,
     val address: String,
-    val longitude: Double,
-    val latitude: Double,
-    val isOpen: Boolean
+    val description: String,
+    val isOpen: Boolean,
+    val openHours: List<OpenHourModel>
 )
+

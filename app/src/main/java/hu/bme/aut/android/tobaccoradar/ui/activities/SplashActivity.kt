@@ -15,14 +15,11 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         APIConnection.initConnection()
-        APIConnection.getAllTobaccoShop()
 
         Handler().postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }, 3000)
-
-
     }
 
     override fun onPause() {

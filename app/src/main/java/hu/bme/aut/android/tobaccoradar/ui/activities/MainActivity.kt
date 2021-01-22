@@ -4,28 +4,29 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import androidx.lifecycle.Observer
 import hu.bme.aut.android.tobaccoradar.R
+import hu.bme.aut.android.tobaccoradar.network.APIConnection
 import hu.bme.aut.android.tobaccoradar.ui.fragments.MapsFragment
 import hu.bme.aut.android.tobaccoradar.ui.fragments.TobaccoShopFragment
 
 
 class MainActivity : AppCompatActivity() {
 
-    val listFragment: TobaccoShopFragment = TobaccoShopFragment.newInstance(1)
+    private val listFragment: TobaccoShopFragment = TobaccoShopFragment.newInstance(1)
 
-    val mapFragment: MapsFragment = MapsFragment()
+    private val mapFragment: MapsFragment = MapsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        APIConnection.tobaccoShopListAPI.observe(this, Observer { shops ->
+            listFragment.recyclerViewAdapter.addAll(shops)
+            listFragment.recyclerViewAdapter.notifyDataSetChanged()
+        })
+
         listFragment.setupRecyclerView()
-        Thread.sleep(500)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.root_container, listFragment)
@@ -43,14 +44,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.switch_view){
-            if(item.title == getString(R.string.list_view)){
+        if (item.itemId == R.id.switch_view) {
+            if (item.title == getString(R.string.list_view)) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.root_container, listFragment)
                     .commit()
                 item.title = getString(R.string.map_view)
-            }
-            else{
+            } else {
                 item.title = getString(R.string.list_view)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.root_container, mapFragment)
