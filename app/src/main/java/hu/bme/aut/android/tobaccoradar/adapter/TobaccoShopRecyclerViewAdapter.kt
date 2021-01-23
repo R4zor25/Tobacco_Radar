@@ -14,10 +14,11 @@ import java.util.*
 class TobaccoShopRecyclerViewAdapter :
     RecyclerView.Adapter<TobaccoShopRecyclerViewAdapter.ViewHolder>() {
 
-    private var tobaccoShopModelList: MutableList<TobaccoShopListModel> =
+    private var tobaccoShopListModelList: MutableList<TobaccoShopListModel> =
         mutableListOf()
 
-    private var searchedTobaccoShopModelList: MutableList<TobaccoShopListModel> = mutableListOf()
+    private var searchedTobaccoShopListModelList: MutableList<TobaccoShopListModel> =
+        mutableListOf()
 
     var itemClickListener: TobaccoShopClickListener? = null
 
@@ -31,7 +32,7 @@ class TobaccoShopRecyclerViewAdapter :
         holder: TobaccoShopRecyclerViewAdapter.ViewHolder,
         position: Int
     ) {
-        val tobaccoShop = tobaccoShopModelList[position]
+        val tobaccoShop = tobaccoShopListModelList[position]
 
         holder.tobaccoShopListModel = tobaccoShop
         holder.tvName.text = tobaccoShop.name
@@ -47,27 +48,27 @@ class TobaccoShopRecyclerViewAdapter :
 
     }
 
-    fun search(text: String) {
-        if (searchedTobaccoShopModelList.isNotEmpty()) {
-            tobaccoShopModelList = searchedTobaccoShopModelList
-            searchedTobaccoShopModelList = mutableListOf()
+    fun search(searchedText: String) {
+        if (searchedTobaccoShopListModelList.isNotEmpty()) {
+            tobaccoShopListModelList = searchedTobaccoShopListModelList
+            searchedTobaccoShopListModelList = mutableListOf()
         }
-        for (s in tobaccoShopModelList) {
-            if (s.name.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)))
-                searchedTobaccoShopModelList.add(s)
+        for (s in tobaccoShopListModelList) {
+            if (s.name.toLowerCase(Locale.ROOT).contains(searchedText.toLowerCase(Locale.ROOT)))
+                searchedTobaccoShopListModelList.add(s)
         }
-        val backUp = tobaccoShopModelList
-        tobaccoShopModelList = searchedTobaccoShopModelList
-        searchedTobaccoShopModelList = backUp
+        val backUp = tobaccoShopListModelList
+        tobaccoShopListModelList = searchedTobaccoShopListModelList
+        searchedTobaccoShopListModelList = backUp
         notifyDataSetChanged()
     }
 
     fun addAll(shops: MutableList<TobaccoShopListModel>) {
-        tobaccoShopModelList.clear()
-        tobaccoShopModelList.addAll(shops)
+        tobaccoShopListModelList.clear()
+        tobaccoShopListModelList.addAll(shops)
     }
 
-    override fun getItemCount() = tobaccoShopModelList.size
+    override fun getItemCount() = tobaccoShopListModelList.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.tvName

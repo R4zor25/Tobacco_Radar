@@ -41,6 +41,5 @@
         tools:layout_editor_absoluteX="2dp"
         tools:listitem="@layout/row_item" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
